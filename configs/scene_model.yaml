@@ -1,0 +1,47 @@
+model_params:
+  name: 'GeneralModel'
+  model: "AE"
+  latent_dim: 6
+  clip_dim: 512
+  res: 224
+  l_mult: 0
+  min_size: 1
+  max_size: 4
+  act_fn: "relu"
+  latent_act_fn: "sigmoid"
+  final_act_fn: "sigmoid"
+  opt: "Adam"
+  d_rate: 0
+  training_images: 1
+  gen_col: False
+  samples_per_pixel_per_frame: 256
+  clip_version: "ViT-B/32" #"ViT-L/14" 
+
+data_params:
+  train_batch_size: 32
+  val_batch_size:  32
+
+exp_params:
+  LR: 0.0001
+  weight_decay: 0
+  scheduler_gamma: 1
+  manual_seed: 23452
+  save_imgs: True
+
+  loss_weights: [1, 1, 1, 1]
+  rand_supervised: 0.9
+
+  ### VAE / AE
+  kld_weight: 0.025
+  beta: 10
+
+trainer_params:
+  accelerator: 'gpu'
+  devices: [0]
+  max_epochs: 10000
+  log_every_n_steps: 16
+
+logging_params:
+  val_dir: "./logs/val_imgs/"
+  name: "general_model"
+  
